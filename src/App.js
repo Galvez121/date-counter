@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import { useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  return <Counter />;
 }
 
-export default App;
+function Counter() {
+  const [step, setStep] = useState(1);
+  function addStep() {
+    setStep((s) => s + 1);
+  }
+  function lessStep() {
+    setStep((s) => s - 1);
+  }
+
+  const [count, setCount] = useState(0);
+  function addCount() {
+    setCount((s) => s + step);
+  }
+  function lessCount() {
+    setCount((s) => s - step);
+  }
+
+  // Date function
+  const date = new Date("11/14/2023");
+  date.setDate(date.getDate() + count);
+
+  return (
+    <>
+      <div>
+        <button onClick={lessStep}>-</button> <p>Step: {step}</p>
+        <button onClick={addStep}>+</button>
+      </div>
+      <div>
+        <button onClick={lessCount}>-</button> <p>Count: {count}</p>
+        <button onClick={addCount}>+</button>
+      </div>
+      <p>{date.toDateString()}</p>
+    </>
+  );
+}
